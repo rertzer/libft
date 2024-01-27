@@ -1,9 +1,15 @@
-CC = gcc
-FLAGS = -Wall -Wextra -Werror
+CC := gcc
+FLAGS := -Wall -Wextra -Werror
 
-TARGET = libft.a
+NAME := libft.a
 
-SOURCES = ft_atoi.c	\
+OBJ_DIR := obj/
+
+SRC_DIR := ./
+
+INC_DIR := ./
+
+SOURCES := ft_atoi.c	\
 	ft_bzero.c	\
 	ft_calloc.c	\
 	ft_isalnum.c	\
@@ -38,8 +44,8 @@ SOURCES = ft_atoi.c	\
 	ft_tolower.c	\
 	ft_toupper.c
 
-SOURCES_BONUS = ft_lstadd_back.c	\
-	ft_lstadd_front.c	\
+SOURCES_BONUS := ft_lstadd_back.c	\
+ft_lstadd_front.c	\
 	ft_lstclear.c	\
 	ft_lstdelone.c	\
 	ft_lstiter.c	\
@@ -47,27 +53,42 @@ SOURCES_BONUS = ft_lstadd_back.c	\
 	ft_lstmap.c	\
 	ft_lstnew.c	\
 	ft_lstsize.c \
-	$(SOURCES)
 
-OBJECTS = $(SOURCES:.c=.o)
+INC := libft.h
 
-OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
+OBJ := $(SOURCES:.c=.o)
 
-all: $(TARGET)
+OBJ_BONUS := $(SOURCES_BONUS:.c=.o)
 
-%.o: %.c
+OBJS := $(addprefix $(OBJ_DIR), $(OBJ))
+OBJS_BONUS := $(addprefix $(OBJ_DIR), $(OBJ_BONUS))
+
+INCS := $(addprefix $(INC_DIR), $(INC))
+
+all: $(NAME)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(FLAGS) -c $< -o $@
 
-$(TARGET): $(OBJECTS)
-	ar cr $@ $(OBJECTS)
+$(NAME): $(OBJ_DIR) $(OBJS) $(INCS)
+	ar cr $@ $(OBJS)
+
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
+
+bonus: $(NAME) $(OBJS_BONUS)
+	ar r $(NAME) $(OBJS_BONUS)
 
 clean:
-	rm -f $(OBJECTS_BONUS)
+	rm -f $(OBJS)
+	rm -f $(OBJS_BONUS)
+	rm -fd $(OBJ_DIR)
 
 fclean: clean
-	rm -f $(TARGET)
+	rm -f $(NAME)
 
-re: fclean all
+re: fclean
+	make all
 
-bonus: $(OBJECTS_BONUS)
-	ar cr $(TARGET) $(OBJECTS_BONUS)
+.PHONY: all bonus clean fclean re
+
