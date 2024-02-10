@@ -6,7 +6,7 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:58:39 by rertzer           #+#    #+#             */
-/*   Updated: 2022/11/14 14:07:09 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/02/10 10:28:42 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
-	char	*cset;
+	char	*current_char;
 
-	cset = s;
+	current_char = (char *)s;
 	i = 0;
 	while (i < n)
 	{
-		cset[i] = '\0';
-		i++;
+		current_char[i] = '\0';
+		++i;
 	}
 }

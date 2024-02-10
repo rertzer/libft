@@ -6,7 +6,7 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:16:43 by rertzer           #+#    #+#             */
-/*   Updated: 2024/02/10 10:17:17 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/02/10 10:28:00 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static const char	*skip_space(const char *nptr)
 
 	i = 0;
 	while (nptr[i] && ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' '))
-		i++;
+		++i;
 	return (&nptr[i]);
 }
 
@@ -49,10 +49,10 @@ static	int	get_int_value(const char *nptr)
 	while (nptr[i])
 	{
 		if (nptr[i] >= '0' && nptr[i] <= '9')
-			total = total * 10 + nptr[i] - 48;
+			total = total * 10 + nptr[i] - ASCII_CODE_ZERO;
 		else
 			break ;
-		i++;
+		++i;
 	}
 	return (total);
 }

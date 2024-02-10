@@ -6,7 +6,7 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:20:30 by rertzer           #+#    #+#             */
-/*   Updated: 2022/11/14 15:55:13 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/02/10 10:46:09 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <unistd.h>
 # include <ctype.h>
 # include <limits.h>
+# include <stdbool.h>
+
+# define ASCII_CODE_ZERO	48
 
 typedef struct s_list
 {
