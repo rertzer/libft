@@ -6,26 +6,45 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:16:43 by rertzer           #+#    #+#             */
-/*   Updated: 2022/11/14 14:06:12 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/02/10 10:17:17 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+static const char	*skip_space(const char *nptr)
 {
 	int	i;
+
+	i = 0;
+	while (nptr[i] && ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' '))
+		i++;
+	return (&nptr[i]);
+}
+
+static int	get_sign(const char *nptr)
+{
 	int	sign;
+
+	sign = 1;
+	if (nptr[0] == '-')
+		sign = -1;
+	return (sign);
+}
+
+static const char	*skip_sign(const char *nptr)
+{
+	if (nptr[0] == '+' || nptr[0] == '-')
+		nptr = &nptr[1];
+	return (nptr);
+}
+
+static	int	get_int_value(const char *nptr)
+{
+	int	i;
 	int	total;
 
 	i = 0;
-	sign = 1;
-	while (nptr[i] && ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' '))
-		i++;
-	if (nptr[i] == '-')
-		sign = -1;
-	if (nptr[i] == '+' || nptr[i] == '-')
-		i++;
 	total = 0;
 	while (nptr[i])
 	{
@@ -35,5 +54,17 @@ int	ft_atoi(const char *nptr)
 			break ;
 		i++;
 	}
+	return (total);
+}
+
+int	ft_atoi(const char *nptr)
+{
+	int		sign;
+	int		total;
+
+	nptr = skip_space(nptr);
+	sign = get_sign(nptr);
+	nptr = skip_sign(nptr);
+	total = get_int_value(nptr);
 	return (sign * total);
 }
