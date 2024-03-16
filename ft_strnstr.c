@@ -6,21 +6,13 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:31:19 by rertzer           #+#    #+#             */
-/*   Updated: 2022/11/15 09:09:49 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/03/16 11:56:59 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_strid(const char *big, const char *little)
-{
-	size_t	i;
-
-	i = 0;
-	while (big[i] && big[i] == little[i])
-		i++;
-	return (little[i]);
-}
+static bool	are_strings_identical(const char *big, const char *little);
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
@@ -31,15 +23,29 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 		return ((char *)big);
 	if (len == 0)
 		return (NULL);
-	little_len = 0;
-	while (little[little_len])
-		little_len++;
+	little_len = ft_strlen(little);
 	i = 0;
-	while ((big[i]) && (i < len - little_len + 1))
+	while ((big[i] != '\0') && (i < len - little_len + 1))
 	{
-		if (ft_strid(&big[i], little) == 0)
+		if (are_strings_identical(&big[i], little) == true)
 			return ((char *)&big[i]);
-		i++;
+		++i;
 	}
 	return (NULL);
+}
+
+static bool	are_strings_identical(const char *big, const char *little)
+{
+	size_t	i;
+	bool	identical;
+
+	identical = false;
+	i = 0;
+	while (big[i] != '\0' && big[i] == little[i])
+	{
+		++i;
+	}
+	if (little[i] == '\0')
+		identical = true;
+	return (identical);
 }

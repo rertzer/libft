@@ -6,28 +6,44 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 12:42:07 by rertzer           #+#    #+#             */
-/*   Updated: 2022/11/14 14:19:36 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/03/16 10:35:47 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
-{
-	int				i;
-	unsigned char	uc;
+static int	get_target_index(const char *str, unsigned char const target);
 
-	if (s == NULL)
+char	*ft_strchr(const char *str, int c)
+{
+	ssize_t	found_index;
+
+	if (str == NULL)
 		return (NULL);
-	uc = (unsigned char) c;
+	found_index = get_target_index(str, (unsigned char)c);
+	if (found_index != -1)
+		return ((char *)&str[found_index]);
+	else
+		return (NULL);
+}
+
+static int	get_target_index(const char *str, unsigned char const target)
+{
+	ssize_t	i;
+	ssize_t	found_index;
+
+	found_index = -1;
 	i = 0;
-	while (s[i])
+	while (str[i] != '\0')
 	{
-		if (s[i] == uc)
-			return ((char *)&s[i]);
-		i++;
+		if (str[i] == target)
+		{
+			found_index = i;
+			break ;
+		}
+		++i;
 	}
-	if (uc == '\0')
-		return ((char *)&s[i]);
-	return (NULL);
+	if (target == '\0')
+		found_index = i;
+	return (found_index);
 }

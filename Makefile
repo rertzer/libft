@@ -30,6 +30,7 @@ SOURCES := ft_atoi.c	\
 	ft_split.c	\
 	ft_split_clean.c \
 	ft_strchr.c	\
+	ft_strcpy.c \
 	ft_strdup.c	\
 	ft_striteri.c	\
 	ft_strjoin.c	\

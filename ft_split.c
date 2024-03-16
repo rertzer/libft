@@ -6,7 +6,7 @@
 /*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 11:58:14 by rertzer           #+#    #+#             */
-/*   Updated: 2024/03/16 10:02:16 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/03/16 10:37:42 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	get_next_word_index(char const *str, char delimiter, int i)
 	{
 		++i;
 	}
-	return i;
+	return (i);
 }
 
 static int	get_word_end_index(char const *str, char delimiter, int i)
@@ -94,6 +94,5 @@ static int	get_word_end_index(char const *str, char delimiter, int i)
 	{
 		++i;
 	}
-	return i;
+	return (i);
 }
-
