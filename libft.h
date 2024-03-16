@@ -6,7 +6,7 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:20:30 by rertzer           #+#    #+#             */
-/*   Updated: 2024/02/10 10:46:09 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/03/16 09:31:18 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
+/*extra functions*/
+char	**ft_split_clean(char ** splited);
 #endif

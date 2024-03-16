@@ -3,82 +3,97 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/11 10:14:37 by rertzer           #+#    #+#             */
-/*   Updated: 2024/03/09 10:01:42 by rertzer          ###   ########.fr       */
+/*   Created: 2022/11/16 11:58:14 by rertzer           #+#    #+#             */
+/*   Updated: 2024/03/16 10:02:16 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	word_count(const char *str, char c);
-static char	*str_malloc_copy(const char *src, int l);
+static int	word_count(char const *s, char delimiter);
+static char	**split_string(char **splited, char const *s, char delimiter);
+static int	get_next_word_index(char const *str, char delimiter, int i);
+static int	get_word_end_index(char const *str, char delimiter, int i);
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *str, char delimiter)
 {
-	int		i;
-	int		j;
-	int		k;
+	int		word_nb;
 	char	**splited;
 
-	k = word_count(s, c);
-	splited = malloc(sizeof (char *) * (k + 1));
-	if (! splited)
+	if (NULL == str)
 		return (NULL);
-	splited[k] = NULL;
+	word_nb = word_count(str, delimiter);
+	splited = malloc(sizeof(char *) * (word_nb + 1));
+	if (NULL == splited)
+		return (NULL);
+	splited[word_nb] = NULL;
+	return (split_string(splited, str, delimiter));
+}
+
+static int	word_count(char const *str, char delimiter)
+{
+	int		i;
+	int		word_nb;
+	bool	is_word;
+
+	word_nb = 0;
+	is_word = false;
 	i = 0;
-	j = -1;
-	while (s[i])
+	while (str[i] != '\0')
 	{
-		while (s[i] == c)
-			i++;
-		if (s[i])
+		if (is_word && str[i] == delimiter)
+				is_word = false;
+		else if (is_word == false && str[i] != delimiter)
 		{
-			k = i;
-			while (s[i] && s[i] != c)
-				i++;
-			splited[++j] = strlm(&s[k], i - k);
+			is_word = true;
+			word_nb++;
 		}
+		++i;
+	}
+	return (word_nb);
+}
+
+static char	**split_string(char **splited, char const *str, char delimiter)
+{
+	size_t	i;
+	size_t	start;
+	size_t	end;
+	size_t	len;
+
+	i = 0;
+	end = 0;
+	len = ft_strlen(str);
+	while (end < len)
+	{
+		start = get_next_word_index(str, delimiter, end);
+		if (start >= len)
+			break ;
+		end = get_word_end_index(str, delimiter, start);
+		splited[i] = ft_substr(str, start, end - start);
+		if (NULL == splited[i])
+			return (ft_split_clean(splited));
+		++i;
 	}
 	return (splited);
 }
 
-static int	word_count(const char *str, char c)
+static int	get_next_word_index(char const *str, char delimiter, int i)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
+	while (str[i] == delimiter)
 	{
-		while (str[i] == c)
-			i++;
-		if (str[i])
-			count++;
-		while (str[i] && str[i] != c)
-			i++;
+		++i;
 	}
-	return (count);
+	return i;
 }
 
-static char	*str_malloc_copy(const char *src, int l)
+static int	get_word_end_index(char const *str, char delimiter, int i)
 {
-	int		i;
-	char	*cpy;
-
-	cpy = malloc(sizeof (char) * (l + 1));
-	if (cpy == NULL)
-		return (NULL);
-	i = 0;
-	while (i < l)
+	while (str[i] != delimiter && str[i] != '\0')
 	{
-		cpy[i] = src[i];
-		i++;
+		++i;
 	}
-	cpy[i] = 0;
-	return (cpy);
+	return i;
 }
-
 
