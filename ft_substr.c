@@ -6,14 +6,14 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:12:45 by rertzer           #+#    #+#             */
-/*   Updated: 2024/03/23 11:04:46 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/03/23 11:19:40 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static size_t	ft_recompute_len(char const *s, unsigned int start, size_t len);
-static void		ft_sub_cpy(char *dest, char const *src, unsigned int start, \
+static void		ft_substr_cpy(char *dest, char const *src, unsigned int start, \
 		size_t len);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

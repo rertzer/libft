@@ -6,7 +6,7 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 09:41:57 by rertzer           #+#    #+#             */
-/*   Updated: 2022/11/13 10:48:33 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/03/23 11:35:43 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_lstsize(t_list *lst)
 	while (current)
 	{
 		current = current->next;
-		i++;
+		++i;
 	}
 	return (i);
 }
