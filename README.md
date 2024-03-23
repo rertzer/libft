@@ -91,3 +91,11 @@ typedef struct s_list
 
 
 ### EXTRA (usefull functions not required by the subject)
+|name|usage|
+|:----------------|:---------|
+|ft_split_clean | char **ft_split_clean(char **splited;|
+| | free a null terminated char** array of strings. Return NULL.|
+| ft_strcpy | char * ft_strcpy(char *dest, const char *src);|
+| |Copy dest into src. Null terminate the string.|
+|ft_is_inset| bool    ft_is_inset(const char c, const char *set);|
+| |Return true if c is in set, else return false.|
