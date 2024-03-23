@@ -6,7 +6,7 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 11:20:30 by rertzer           #+#    #+#             */
-/*   Updated: 2024/03/16 10:54:14 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/03/23 10:01:31 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,5 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
 /*extra functions*/
 char	**ft_split_clean(char **splited);
 char	*ft_strcpy(char *dest, const char *src);
+bool	ft_is_inset(const char c, const char *set);
 #endif

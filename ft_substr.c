@@ -6,35 +6,54 @@
 /*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 16:12:45 by rertzer           #+#    #+#             */
-/*   Updated: 2022/11/15 09:10:43 by rertzer          ###   ########.fr       */
+/*   Updated: 2024/03/23 11:04:46 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static size_t	ft_recompute_len(char const *s, unsigned int start, size_t len);
+static void		ft_sub_cpy(char *dest, char const *src, unsigned int start, \
+		size_t len);
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	size_t	slen;
 	char	*dest;
 
-	slen = ft_strlen(s);
-	if (start + len > slen)
-		len = slen - start;
-	if (!(start < slen))
-	{
-		len = 0;
-		start = 0;
-	}
+	len = ft_recompute_len(s, start, len);
 	dest = malloc(sizeof(char) * (len + 1));
 	if (dest == NULL)
 		return (NULL);
-	i = 0;
-	while (s[start + i] && i < len)
+	ft_substr_cpy(dest, s, start, len);
+	return (dest);
+}
+
+static	size_t	ft_recompute_len(char const *s, unsigned int start, size_t len)
+{
+	size_t	str_len;
+
+	str_len = ft_strlen(s);
+	if (start + len > str_len)
 	{
-		dest[i] = s[start + i];
-			i++;
+		len = str_len - start;
+	}
+	if (start >= str_len)
+	{
+		len = 0;
+	}
+	return (len);
+}
+
+static void	ft_substr_cpy(char *dest, char const *src, unsigned int start, \
+		size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len && src[start + i])
+	{
+		dest[i] = src[start + i];
+			++i;
 	}
 	dest[i] = '\0';
-	return (dest);
 }

@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_is_inset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rertzer <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: rertzer <rertzer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 12:54:15 by rertzer           #+#    #+#             */
-/*   Updated: 2024/03/23 09:28:58 by rertzer          ###   ########.fr       */
+/*   Created: 2024/03/23 09:55:07 by rertzer           #+#    #+#             */
+/*   Updated: 2024/03/23 10:14:36 by rertzer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *s, int c)
+bool	ft_is_inset(const char c, const char *set)
 {
-	size_t			i;
-	unsigned char	uc;
-	char			*found;
+	size_t	i;
 
-	if (s == NULL)
-		return (NULL);
-	found = NULL;
-	uc = (unsigned char) c;
 	i = 0;
-	while (s[i])
+	while (set[i] != '\0')
 	{
-		if (s[i] == uc)
-			found = (char *)&s[i];
+		if (set[i] == c)
+			return (true);
 		++i;
 	}
-	if (uc == '\0')
-		found = (char *)&s[i];
-	return (found);
+	return (false);
 }
